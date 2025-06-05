@@ -1,0 +1,487 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+  overflow: hidden;
+  /* Disable scroll until opened */
+  background-color: var(--primaryColor);
+}
+
+:root {
+  --primaryColor: #debe95;
+  --secColor: #b55a3a;
+  /* Editable by Request*/
+  --aksencolor: #322422;
+  --shadowcolor: rgba(50, 36, 34, 0.75);
+}
+
+
+/* LANDING PAGE */
+.landing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* Background foto yang di-blur */
+.landing-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(img/_MG_5400.JPG) center/cover no-repeat;
+  filter: blur(8px) brightness(50%);
+  transform: scale(1.05);
+  /* agar tidak ada garis pinggir akibat blur */
+  z-index: 1;
+}
+
+/* Isi konten di atasnya */
+.landing-content {
+  position: relative;
+  z-index: 2;
+  color: var(--primaryColor);
+  text-align: center;
+  padding: 2rem;
+}
+
+.landing-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--secColor);
+  margin-bottom: 1rem;
+  margin-top: 1.2rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.landing h1 {
+  margin-bottom: 0.5rem;
+  font-family: "Rouge Script", cursive;
+  font-weight: 550;
+  font-style: normal;
+  font-size: 4em;
+  color: white;
+}
+
+.landing p {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.landing button {
+  margin: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--secColor);
+  color: var(--primaryColor);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.landing button:hover {
+  background-color: var(--aksencolor);
+  transform: scale(1.1);
+}
+
+.landing.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* MAIN CONTENT */
+
+
+/* Navbar Bottom */
+.navigation {
+  padding: 5%;
+  align-items: end;
+  display: none;
+  width: 100%;
+  bottom: 0;
+}
+
+.nav-container {
+  position: absolute;
+  width: 90%;
+  height: 70px;
+  border-radius: 10px;
+  background-color: var(--aksencolor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.nav-container ul {
+  display: flex;
+  width: 85%;
+  justify-content: space-between;
+}
+
+.nav-container ul li {
+  position: relative;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 70px;
+  height: 70px;
+  z-index: 1;
+}
+
+.nav-container ul li a {
+  position: relative;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font: 500;
+}
+
+ul li .icon {
+  position: relative;
+  display: block;
+  line-height: 70px;
+  font-size: 3em;
+  text-align: center;
+  transition: 0.5s;
+  color: var(--secColor);
+}
+
+ul li.active .icon {
+  transform: translateY(-35px);
+  color: var(--primaryColor);
+}
+
+ul li .text {
+  position: absolute;
+  color: var(--secColor);
+  font-weight: 700;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(20px)
+}
+
+ul li.active .text {
+  opacity: 1;
+  transform: translateY(13.5px);
+}
+
+.indicator {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  background-color: var(--secColor);
+  border-radius: 50%;
+  border: 6px solid var(--primaryColor);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  display: none;
+}
+
+#indicator.active {
+  display: block;
+}
+
+
+.indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  left: -22px;
+  border-top-right-radius: 20px;
+  box-shadow: 1px -10px 0 0 var(--primaryColor);
+}
+
+.indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  right: -22px;
+  border-top-left-radius: 20px;
+  box-shadow: -1px -10px 0 0 var(--primaryColor);
+}
+
+/* WEB START */
+/* Home */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  margin: 1.5rem;
+  padding: 0.7rem 0.7rem;
+  border: none;
+  border-radius: 25px;
+  background-color: var(--secColor);
+  color: var(--primaryColor);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.text h1 {
+  font-family: "Rouge Script", cursive;
+  font-size: 5em;
+  text-align: center;
+  line-height: 4.2rem;
+  margin: 1rem;
+  color: white;
+}
+
+.text {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  color: white;
+  z-index: 3;
+}
+
+.text p {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.btn .icon {
+  position: relative;
+  display: block;
+  line-height: auto;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+
+.btn:hover {
+  background-color: var(--aksencolor);
+  transform: scale(1.1);
+}
+
+.home-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(img/IMG_20230831_203329\ \(1\).jpg) center/cover no-repeat ;
+}
+
+a {
+  text-decoration: none;
+
+}
+
+/* Profile Section Start */
+.profile {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  background-color: antiquewhite;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  height: auto;
+  text-align: center;
+  color: var(--aksencolor);
+  overflow: hidden;
+  font-weight: 500;
+  color: var(--aksencolor);
+  }
+
+.photo-profile {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--aksencolor);
+  margin-bottom: 1rem;
+  margin-top: 1.2rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.decor-top {
+  position: relative;
+  margin: 2rem 0;
+  width: 50%;
+  max-height: 100%;
+  display: block;
+}
+
+.decor-bottom {
+  position: relative;
+  display: block;
+  max-height: 100%;
+  width: 50%;
+  margin: 2rem 0;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+}
+
+.nama {
+    font-family: "Rouge Script", cursive;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+/* Acara Start */
+.acara {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  height: auto;
+  width: 100%;
+  display: flex; /* WAJIB agar justify-content dan align-items bekerja */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Supaya kontennya disusun dari atas ke bawah */
+}
+
+.keterangan-acara {
+  width: 80%;
+  text-align: center;
+}
+
+.googlemaps {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  height: auto;
+  width: 100%;
+  display: flex; /* WAJIB agar justify-content dan align-items bekerja */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Supaya kontennya disusun dari atas ke bawah */
+}
+
+.maps {
+  width: 80%;
+  height: 400px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+/* Galery Section */
+.galeri {
+  padding: 2rem;
+  text-align: center;
+  background-color: white;
+}
+
+.galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+.galeri-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+
+
+/* Laptop */
+@media (max-width: 992px) {
+  html {
+    top: 0;
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  .text p {
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+
+  .text h1 {
+    margin: 3rem;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    width: 250px;
+  }
+
+  .profile-container {
+    font-size: 75%;
+    font-weight: 500;
+    width: 80%;
+  }
+
+  }
+  .decor-top {
+  margin: 2rem 0;
+  width: 80%;
+  }
+
+  .decor-bottom {
+    width: 80%;
+    margin: 2rem 0;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+  }
+
+  
+/* Tablet */
+@media (max-width: 768px) {
+  .nama {
+    font-size: 1.8rem;
+  }
+
+ }
+
+/* Handphone */
+@media (max-width: 576px) {
+   .btn {
+    transform: scale(0.75);
+  }
+}
